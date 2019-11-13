@@ -8,7 +8,10 @@ __pycache__/
 
 # Distribution / packaging
 .Python
+<<<<<<< HEAD
 env/
+=======
+>>>>>>> faecb887ea198549ceb0fbbb450fa938cafe4751
 build/
 develop-eggs/
 dist/
@@ -24,6 +27,10 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+<<<<<<< HEAD
+=======
+MANIFEST
+>>>>>>> faecb887ea198549ceb0fbbb450fa938cafe4751
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
