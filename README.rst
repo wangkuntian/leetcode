@@ -2,12 +2,12 @@
 leetcode
 ========
 
+.. image:: https://img.shields.io/github/license/wangkuntian/leetcode
+        :alt: MIT
+        :target: https://github.com/wangkuntian/leetcode/master/LICENSE
 
 .. image:: https://img.shields.io/github/pipenv/locked/python-version/wangkuntian/leetcode
         :alt: GitHub Pipenv locked Python version
-
-.. image:: https://img.shields.io/github/license/wangkuntian/leetcode
-        :alt: GitHub
 
 Python Boilerplate contains all the boilerplate you need to create a Python package.
 
