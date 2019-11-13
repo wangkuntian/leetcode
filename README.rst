@@ -3,17 +3,8 @@ leetcode
 ========
 
 
-.. image:: https://img.shields.io/pypi/v/leetcode.svg
-        :target: https://pypi.python.org/pypi/leetcode
-
-.. image:: https://img.shields.io/travis/wangkuntian/leetcode.svg
-        :target: https://travis-ci.org/wangkuntian/leetcode
-
-.. image:: https://readthedocs.org/projects/leetcode/badge/?version=latest
-        :target: https://leetcode.readthedocs.io/en/latest/?badge=latest
-        :alt: Documentation Status
-
-
+.. image:: https://img.shields.io/github/pipenv/locked/python-version/wangkuntian/leetcode
+        :alt: GitHub Pipenv locked Python version
 
 
 Python Boilerplate contains all the boilerplate you need to create a Python package.
