@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
 """
 __project__ =  'leetcode'
 __file__    =  '__init__.py.py'
@@ -31,7 +30,6 @@ __time__    =  '2019/11/18 16:54'
 """
 from leetcode.lessons.linked_list import ListNode
 from leetcode.utils.timeutils import time_interval
-
 '''
 反转从位置 m 到 n 的链表。请使用一趟扫描完成反转。
 
@@ -45,6 +43,7 @@ from leetcode.utils.timeutils import time_interval
 
 
 class Solution(object):
+    @time_interval
     def reverseBetween(self, head, m, n):
         """
         :type head: ListNode
@@ -52,18 +51,24 @@ class Solution(object):
         :type n: int
         :rtype: ListNode
         """
-        result = temp = ListNode(None)
+        result = node = ListNode(None)
         result.next = head
-        index = 1
-        x = y = None
-        while temp.next:
-            if index == m:
-                x = temp
-            if index == n:
-                y = temp
+        n -= m
+        while m > 1:
+            node = node.next
+            m -= 1
+        tail = None
+        reversed_head = None
+        next_reverse = node.next
 
-            index += 1
-            temp = temp.next
+        while n >= 0:
+            tail = next_reverse.next
+            next_reverse.next = reversed_head
+            reversed_head = next_reverse
+            next_reverse = tail
+            n -= 1
+        node.next.next = tail
+        node.next = reversed_head
 
         return result.next
 
