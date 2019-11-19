@@ -5,7 +5,7 @@
 __project__ =  'leetcode'
 __file__    =  '__init__.py.py'
 __author__  =  'king'
-__time__    =  '2019/11/15 09:53'
+__time__    =  '2019/11/18 10:08'
 
 
                               _ooOoo_
@@ -33,41 +33,47 @@ from leetcode.lessons.linked_list import ListNode
 from leetcode.utils.timeutils import time_interval
 
 '''
-难度：中等
-给定一个链表，删除链表的倒数第 n 个节点，并且返回链表的头结点。
+难度：简单
 
-示例：
-    给定一个链表: 1->2->3->4->5, 和 n = 2.
-
-当删除了倒数第二个节点后，链表变为 1->2->3->5.
-说明：
-    给定的 n 保证是有效的。
-
-进阶：
-    你能尝试使用一趟扫描实现吗？
+编写一个程序，找到两个单链表相交的起始节点。
 '''
+
+import gc
 
 
 class Solution(object):
     @time_interval
-    def removeNthFromEnd(self, head, n):
+    def getIntersectionNode(self, headA, headB):
         """
-        :type head: ListNode
-        :type n: int
+        :type: ListNode
         :rtype: ListNode
         """
-        x = y = head
-        for i in range(n):
-            x = x.next
-        if not x:
-            return head.next
-        while x.next:
-            x = x.next
-            y = y.next
-        y.next = y.next.next
-        return head
+        if not headA or not headB:
+            return None
+        x = headA
+        y = headB
+        while headA != headB:
+            headA = y if not headA else headA.next
+            headB = x if not headB else headB.next
+        gc.collect()
+        return headA
 
 
-l1 = ListNode.generate([1, 2, 3, 4, 5])
+l1 = ListNode(4)
+l2 = ListNode(1)
+l3 = ListNode(8)
+l4 = ListNode(4)
+l5 = ListNode(5)
+l1.next = l2
+l2.next = l3
+l3.next = l4
+l4.next = l5
 
-print(Solution().removeNthFromEnd(l1, 2))
+l6 = ListNode(5)
+l7 = ListNode(0)
+l8 = ListNode(1)
+l6.next = l7
+l7.next = l8
+l8.next = l3
+
+print(Solution().getIntersectionNode(l1, l6))

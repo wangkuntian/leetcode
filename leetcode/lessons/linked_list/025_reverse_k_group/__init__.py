@@ -5,7 +5,7 @@
 __project__ =  'leetcode'
 __file__    =  '__init__.py.py'
 __author__  =  'king'
-__time__    =  '2019/11/15 09:53'
+__time__    =  '2019/11/15 17:41'
 
 
                               _ooOoo_
@@ -29,45 +29,33 @@ __time__    =  '2019/11/15 09:53'
           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
                        佛祖保佑        永无BUG
 """
+
 from leetcode.lessons.linked_list import ListNode
 from leetcode.utils.timeutils import time_interval
 
 '''
-难度：中等
-给定一个链表，删除链表的倒数第 n 个节点，并且返回链表的头结点。
+难度：困难
 
-示例：
-    给定一个链表: 1->2->3->4->5, 和 n = 2.
+给你一个链表，每 k 个节点一组进行翻转，请你返回翻转后的链表。
+k 是一个正整数，它的值小于或等于链表的长度。
+如果节点总数不是 k 的整数倍，那么请将最后剩余的节点保持原有顺序。
 
-当删除了倒数第二个节点后，链表变为 1->2->3->5.
-说明：
-    给定的 n 保证是有效的。
+示例:
+    给定这个链表：1->2->3->4->5
+    当 k = 2 时，应当返回: 2->1->4->3->5
+    当 k = 3 时，应当返回: 3->2->1->4->5
 
-进阶：
-    你能尝试使用一趟扫描实现吗？
+说明:
+    你的算法只能使用常数的额外空间。
+    你不能只是单纯的改变节点内部的值，而是需要实际的进行节点交换。
 '''
 
 
 class Solution(object):
     @time_interval
-    def removeNthFromEnd(self, head, n):
+    def reverseKGroup(self, head, k):
         """
         :type head: ListNode
-        :type n: int
+        :type k: int
         :rtype: ListNode
         """
-        x = y = head
-        for i in range(n):
-            x = x.next
-        if not x:
-            return head.next
-        while x.next:
-            x = x.next
-            y = y.next
-        y.next = y.next.next
-        return head
-
-
-l1 = ListNode.generate([1, 2, 3, 4, 5])
-
-print(Solution().removeNthFromEnd(l1, 2))

@@ -45,3 +45,11 @@ class ListNode(object):
             temp = temp.next
         s += 'None'
         return s
+
+    @classmethod
+    def generate(cls, nums):
+        result = temp = ListNode(nums[0])
+        for i in nums[1:]:
+            temp.next = ListNode(i)
+            temp = temp.next
+        return result

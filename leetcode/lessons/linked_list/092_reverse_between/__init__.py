@@ -5,7 +5,7 @@
 __project__ =  'leetcode'
 __file__    =  '__init__.py.py'
 __author__  =  'king'
-__time__    =  '2019/11/15 09:53'
+__time__    =  '2019/11/18 16:54'
 
 
                               _ooOoo_
@@ -33,41 +33,40 @@ from leetcode.lessons.linked_list import ListNode
 from leetcode.utils.timeutils import time_interval
 
 '''
-难度：中等
-给定一个链表，删除链表的倒数第 n 个节点，并且返回链表的头结点。
+反转从位置 m 到 n 的链表。请使用一趟扫描完成反转。
 
-示例：
-    给定一个链表: 1->2->3->4->5, 和 n = 2.
+说明:
+    1 ≤ m ≤ n ≤ 链表长度。
 
-当删除了倒数第二个节点后，链表变为 1->2->3->5.
-说明：
-    给定的 n 保证是有效的。
-
-进阶：
-    你能尝试使用一趟扫描实现吗？
+示例:
+    输入: 1->2->3->4->5->NULL, m = 2, n = 4
+    输出: 1->4->3->2->5->NULL
 '''
 
 
 class Solution(object):
-    @time_interval
-    def removeNthFromEnd(self, head, n):
+    def reverseBetween(self, head, m, n):
         """
         :type head: ListNode
+        :type m: int
         :type n: int
         :rtype: ListNode
         """
-        x = y = head
-        for i in range(n):
-            x = x.next
-        if not x:
-            return head.next
-        while x.next:
-            x = x.next
-            y = y.next
-        y.next = y.next.next
-        return head
+        result = temp = ListNode(None)
+        result.next = head
+        index = 1
+        x = y = None
+        while temp.next:
+            if index == m:
+                x = temp
+            if index == n:
+                y = temp
+
+            index += 1
+            temp = temp.next
+
+        return result.next
 
 
 l1 = ListNode.generate([1, 2, 3, 4, 5])
-
-print(Solution().removeNthFromEnd(l1, 2))
+print(Solution().reverseBetween(l1, 2, 4))

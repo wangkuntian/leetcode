@@ -5,7 +5,7 @@
 __project__ =  'leetcode'
 __file__    =  '__init__.py.py'
 __author__  =  'king'
-__time__    =  '2019/11/15 09:53'
+__time__    =  '2019/11/15 11:27'
 
 
                               _ooOoo_
@@ -29,45 +29,49 @@ __time__    =  '2019/11/15 09:53'
           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
                        佛祖保佑        永无BUG
 """
+import heapq
 from leetcode.lessons.linked_list import ListNode
 from leetcode.utils.timeutils import time_interval
 
 '''
-难度：中等
-给定一个链表，删除链表的倒数第 n 个节点，并且返回链表的头结点。
+难度：困难
 
-示例：
-    给定一个链表: 1->2->3->4->5, 和 n = 2.
+合并 k 个排序链表，返回合并后的排序链表。请分析和描述算法的复杂度。
 
-当删除了倒数第二个节点后，链表变为 1->2->3->5.
-说明：
-    给定的 n 保证是有效的。
-
-进阶：
-    你能尝试使用一趟扫描实现吗？
+示例:
+    输入:
+    [
+      1->4->5,
+      1->3->4,
+      2->6
+    ]
+    输出: 1->1->2->3->4->4->5->6
 '''
 
 
 class Solution(object):
     @time_interval
-    def removeNthFromEnd(self, head, n):
+    def mergeKLists(self, lists):
         """
-        :type head: ListNode
-        :type n: int
+        :type lists: List[ListNode]
         :rtype: ListNode
         """
-        x = y = head
-        for i in range(n):
-            x = x.next
-        if not x:
-            return head.next
-        while x.next:
-            x = x.next
-            y = y.next
-        y.next = y.next.next
-        return head
+        temp = result = ListNode(0)
+        nodes = [(l.val, l) for l in lists if l]
+        heapq.heapify(nodes)
+
+        while nodes:
+            value, node = heapq.heappop(nodes)
+            temp.next = node
+            temp = temp.next
+            if node.next:
+                heapq.heappush(nodes, (node.next.val, node.next))
+
+        return result.next
 
 
-l1 = ListNode.generate([1, 2, 3, 4, 5])
+l1 = ListNode.generate([1, 2, 5])
 
-print(Solution().removeNthFromEnd(l1, 2))
+l4 = ListNode.generate([3, 3, 4])
+
+print(Solution().mergeKLists([l1, l4]))

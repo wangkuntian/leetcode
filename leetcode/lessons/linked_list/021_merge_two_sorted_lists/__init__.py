@@ -66,16 +66,7 @@ class Solution(object):
         return result.next
 
 
-l1 = ListNode(1)
-l2 = ListNode(2)
-l3 = ListNode(5)
-l1.next = l2
-l2.next = l3
+l1 = ListNode.generate([1, 2, 3])
+l2 = ListNode.generate([3, 4, 5])
 
-l4 = ListNode(3)
-l5 = ListNode(3)
-l6 = ListNode(4)
-l4.next = l5
-l5.next = l6
-
-print(Solution().mergeTwoLists(l1, l4))
+print(Solution().mergeTwoLists(l1, l2))

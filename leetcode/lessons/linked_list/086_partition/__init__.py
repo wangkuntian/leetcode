@@ -5,7 +5,7 @@
 __project__ =  'leetcode'
 __file__    =  '__init__.py.py'
 __author__  =  'king'
-__time__    =  '2019/11/15 09:53'
+__time__    =  '2019/11/18 16:11'
 
 
                               _ooOoo_
@@ -34,40 +34,40 @@ from leetcode.utils.timeutils import time_interval
 
 '''
 难度：中等
-给定一个链表，删除链表的倒数第 n 个节点，并且返回链表的头结点。
 
-示例：
-    给定一个链表: 1->2->3->4->5, 和 n = 2.
+给定一个链表和一个特定值 x，对链表进行分隔，使得所有小于 x 的节点都在大于或等于 x 的节点之前。
 
-当删除了倒数第二个节点后，链表变为 1->2->3->5.
-说明：
-    给定的 n 保证是有效的。
+你应当保留两个分区中每个节点的初始相对位置。
 
-进阶：
-    你能尝试使用一趟扫描实现吗？
+示例:
+    输入: head = 1->4->3->2->5->2, x = 3
+    输出: 1->2->2->4->3->5
 '''
 
 
 class Solution(object):
     @time_interval
-    def removeNthFromEnd(self, head, n):
+    def partition(self, head, x):
         """
         :type head: ListNode
-        :type n: int
+        :type x: int
         :rtype: ListNode
         """
-        x = y = head
-        for i in range(n):
-            x = x.next
-        if not x:
-            return head.next
-        while x.next:
-            x = x.next
-            y = y.next
-        y.next = y.next.next
-        return head
+        before = before_head = ListNode(None)
+        after = after_head = ListNode(None)
+
+        while head:
+            if head.val < x:
+                before.next = head
+                before = before.next
+            else:
+                after.next = head
+                after = after.next
+            head = head.next
+        after.next = None
+        before.next = after_head.next
+        return before_head.next
 
 
-l1 = ListNode.generate([1, 2, 3, 4, 5])
-
-print(Solution().removeNthFromEnd(l1, 2))
+l1 = ListNode.generate([1, 4, 3, 2, 5, 2])
+print(Solution().partition(l1, 3))

@@ -5,7 +5,7 @@
 __project__ =  'leetcode'
 __file__    =  '__init__.py.py'
 __author__  =  'king'
-__time__    =  '2019/11/15 09:53'
+__time__    =  '2019/11/18 11:50'
 
 
                               _ooOoo_
@@ -33,41 +33,64 @@ from leetcode.lessons.linked_list import ListNode
 from leetcode.utils.timeutils import time_interval
 
 '''
-难度：中等
-给定一个链表，删除链表的倒数第 n 个节点，并且返回链表的头结点。
+难度：简单
 
-示例：
-    给定一个链表: 1->2->3->4->5, 和 n = 2.
+请判断一个链表是否为回文链表。
 
-当删除了倒数第二个节点后，链表变为 1->2->3->5.
-说明：
-    给定的 n 保证是有效的。
-
+示例 1:
+    输入: 1->2
+    输出: false
+    
+示例 2:
+    输入: 1->2->2->1
+    输出: true
+    
 进阶：
-    你能尝试使用一趟扫描实现吗？
+    你能否用 O(n) 时间复杂度和 O(1) 空间复杂度解决此题？
 '''
 
 
 class Solution(object):
     @time_interval
-    def removeNthFromEnd(self, head, n):
+    def isPalindrome(self, head):
         """
         :type head: ListNode
-        :type n: int
-        :rtype: ListNode
+        :rtype: bool
         """
-        x = y = head
-        for i in range(n):
+        fast = slow = head
+        x = None
+        while fast and fast.next:
+            fast = fast.next.next
+            temp = slow.next
+            slow.next = x
+            x = slow
+            slow = temp
+
+        if fast:
+            slow = slow.next
+
+        while slow:
+            if slow.val != x.val:
+                return False
+            slow = slow.next
             x = x.next
-        if not x:
-            return head.next
-        while x.next:
-            x = x.next
-            y = y.next
-        y.next = y.next.next
-        return head
+        return True
+
+    @time_interval
+    def isPalindrome2(self, head):
+        """
+        :type head: ListNode
+        :rtype: bool
+        """
+        x = []
+        while head:
+            x.append(head.val)
+            head = head.next
+        return x == x[::-1]
 
 
-l1 = ListNode.generate([1, 2, 3, 4, 5])
+l1 = ListNode.generate([1, 2, 2, 1])
+print(Solution().isPalindrome(l1))
 
-print(Solution().removeNthFromEnd(l1, 2))
+l2 = ListNode.generate([1, 2, 2, 1])
+print(Solution().isPalindrome2(l2))

@@ -5,7 +5,7 @@
 __project__ =  'leetcode'
 __file__    =  '__init__.py.py'
 __author__  =  'king'
-__time__    =  '2019/11/15 09:53'
+__time__    =  '2019/11/15 14:04'
 
 
                               _ooOoo_
@@ -34,40 +34,53 @@ from leetcode.utils.timeutils import time_interval
 
 '''
 难度：中等
-给定一个链表，删除链表的倒数第 n 个节点，并且返回链表的头结点。
 
-示例：
-    给定一个链表: 1->2->3->4->5, 和 n = 2.
+给定一个链表，两两交换其中相邻的节点，并返回交换后的链表。
 
-当删除了倒数第二个节点后，链表变为 1->2->3->5.
-说明：
-    给定的 n 保证是有效的。
+你不能只是单纯的改变节点内部的值，而是需要实际的进行节点交换。
 
-进阶：
-    你能尝试使用一趟扫描实现吗？
+示例:
+    给定 1->2->3->4, 你应该返回 2->1->4->3.
+
 '''
 
 
 class Solution(object):
     @time_interval
-    def removeNthFromEnd(self, head, n):
+    def swapPairs(self, head):
         """
         :type head: ListNode
-        :type n: int
         :rtype: ListNode
         """
-        x = y = head
-        for i in range(n):
-            x = x.next
-        if not x:
-            return head.next
-        while x.next:
-            x = x.next
-            y = y.next
-        y.next = y.next.next
-        return head
+        if not head or not head.next:
+            return head
+        temp = head.next
+        head.next = self.swapPairs(temp.next)
+        temp.next = head
+        return temp
+
+    @time_interval
+    def swapPairs2(self, head):
+        """
+        :type head: ListNode
+        :rtype: ListNode
+        """
+        result = ListNode(-1)
+        result.next = head
+        x = result
+        while x.next and x.next.next:
+            a, b = x.next, x.next.next
+            a.next = b.next
+            b.next = a
+            x.next = b
+            x = x.next.next
+        return result.next
 
 
-l1 = ListNode.generate([1, 2, 3, 4, 5])
+l1 = ListNode.generate(nums=[1, 2, 3, 4])
 
-print(Solution().removeNthFromEnd(l1, 2))
+print(Solution().swapPairs(l1))
+
+l2 = ListNode.generate(nums=[1, 2, 3, 4])
+
+print(Solution().swapPairs2(l2))

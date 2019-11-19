@@ -70,16 +70,8 @@ class Solution(object):
         return result.next
 
 
-l1 = ListNode(2)
-l2 = ListNode(4)
-l3 = ListNode(3)
-l1.next = l2
-l2.next = l3
+l1 = ListNode.generate([2, 3, 4])
 
-l4 = ListNode(5)
-l5 = ListNode(6)
-l6 = ListNode(4)
-l4.next = l5
-l5.next = l6
+l4 = ListNode.generate([5, 6, 4])
 
 print(Solution().addTwoNumbers(l1, l4))
