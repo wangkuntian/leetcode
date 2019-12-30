@@ -32,6 +32,8 @@ from leetcode.lessons.linked_list import ListNode
 from leetcode.utils.timeutils import time_interval
 
 '''
+难度：中等
+
 反转从位置 m 到 n 的链表。请使用一趟扫描完成反转。
 
 说明:
