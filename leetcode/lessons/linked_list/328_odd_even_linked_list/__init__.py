@@ -5,7 +5,7 @@
 __project__ =  'leetcode'
 __file__    =  '__init__.py.py'
 __author__  =  'king'
-__time__    =  '2019/11/15 16:31'
+__time__    =  '2020/1/7 22:28'
 
 
                               _ooOoo_
@@ -32,54 +32,50 @@ __time__    =  '2019/11/15 16:31'
 from leetcode.lessons.linked_list import ListNode
 from leetcode.utils.timeutils import time_interval
 
-'''
-难度：简单
+"""
+难度：中等
 
-给定一个链表，判断链表中是否有环。
+给定一个单链表，把所有的奇数节点和偶数节点分别排在一起。
+请注意，这里的奇数节点和偶数节点指的是节点编号的奇偶性，而不是节点的值的奇偶性。
 
-为了表示给定链表中的环，我们使用整数 pos 来表示链表尾连接到链表中的位置（索引从 0 开始）。 
-如果 pos 是 -1，则在该链表中没有环。
+请尝试使用原地算法完成。你的算法的空间复杂度应为 O(1)，时间复杂度应为 O(nodes)，nodes 为节点总数。
 
-示例 1：
-    输入：head = [3,2,0,-4], pos = 1
-    输出：true
-    解释：链表中有一个环，其尾部连接到第二个节点。
+示例 1:
+输入: 1->2->3->4->5->NULL
+输出: 1->3->5->2->4->NULL
 
-示例 2：
-    输入：head = [1,2], pos = 0
-    输出：true
-    解释：链表中有一个环，其尾部连接到第一个节点。
+示例 2:
+输入: 2->1->3->5->6->4->7->NULL
+输出: 2->3->6->7->1->5->4->NULL
 
-示例 3：
-    输入：head = [1], pos = -1
-    输出：false
-    解释：链表中没有环。
-
-进阶：
-    你能用 O(1)（即，常量）内存解决此问题吗？
-'''
+说明:
+应当保持奇数节点和偶数节点的相对顺序。
+链表的第一个节点视为奇数节点，第二个节点视为偶数节点，以此类推。
+"""
 
 
 class Solution(object):
     @time_interval
-    def hasCycle(self, head):
+    def oddEvenList(self, head):
         """
         :type head: ListNode
-        :rtype: bool
+        :rtype: ListNode
         """
-        if not head or not head.next:
-            return False
-        slow = head
-        fast = head.next
-        while fast != slow:
-            if not fast or not fast.next:
-                return False
-            slow = slow.next
-            fast = fast.next.next
-        return True
+        odd_head = odd = ListNode(None)
+        even_head = even = ListNode(None)
+
+        while head:
+            odd.next = head
+            odd = odd.next
+            even.next = head.next
+            even = even.next
+
+            head = head.next.next if even else None
+
+        odd.next = even_head.next
+
+        return odd_head.next
 
 
-l1 = ListNode.generate([1, 2])
-l2 = l1.next
-l2.next = l1
-print(Solution().hasCycle(l1))
+l = ListNode.generate([1, 2, 3, 4, 5])
+print(Solution().oddEvenList(l))

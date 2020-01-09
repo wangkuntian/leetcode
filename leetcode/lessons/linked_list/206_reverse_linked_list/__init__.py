@@ -5,7 +5,7 @@
 __project__ =  'leetcode'
 __file__    =  '__init__.py.py'
 __author__  =  'king'
-__time__    =  '2019/11/15 10:48'
+__time__    =  '2019/11/15 17:11'
 
 
                               _ooOoo_
@@ -35,38 +35,47 @@ from leetcode.utils.timeutils import time_interval
 '''
 难度：简单
 
-将两个有序链表合并为一个新的有序链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。 
+反转一个单链表。
 
-示例：
-    输入：1->2->4, 1->3->4
-    输出：1->1->2->3->4->4
+示例:
+    输入: 1->2->3->4->5->NULL
+    输出: 5->4->3->2->1->NULL
+进阶:
+    你可以迭代或递归地反转链表。你能否用两种方法解决这道题？
 '''
 
 
 class Solution(object):
     @time_interval
-    def mergeTwoLists(self, l1, l2):
+    def reverseList(self, head):
         """
-        :type l1: ListNode
-        :type l2: ListNode
+        :type head: ListNode
         :rtype: ListNode
         """
-        temp = result = ListNode(0)
-        while l1 and l2:
-            if l1.val >= l2.val:
-                temp.next = l2
-                l2 = l2.next
-            else:
-                temp.next = l1
-                l1 = l1.next
-            temp = temp.next
+        x = None
+        while head:
+            temp = head.next
+            head.next = x
+            x = head
+            head = temp
+        return x
 
-        temp.next = l1 or l2
+    @time_interval
+    def reverseList_2(self, head):
+        """
+        :type head: ListNode
+        :rtype: ListNode
+        """
+        if not head or not head.next:
+            return head
+        result = self.reverseList_2(head.next)
+        head.next.next = head
+        head.next = None
+        return result
 
-        return result.next
 
+l1 = ListNode.generate([1, 2, 3, 4, 5])
+print(Solution().reverseList(l1))
 
-l1 = ListNode.generate([1, 2, 3])
-l2 = ListNode.generate([3, 4, 5])
-
-print(Solution().mergeTwoLists(l1, l2))
+l2 = ListNode.generate([1, 2, 3, 4, 5])
+print(Solution().reverseList_2(l2))
