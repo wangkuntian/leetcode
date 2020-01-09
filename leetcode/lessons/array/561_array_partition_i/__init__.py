@@ -73,5 +73,3 @@ class Solution(object):
 
 print(Solution().arrayPairSum([7, 3, 1, 0, 0, 6]))
 print(Solution().arrayPairSum_2([7, 3, 1, 0, 0, 6]))
-
-enumerate
