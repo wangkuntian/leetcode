@@ -47,9 +47,11 @@ __time__    =  '2020/2/10 15:43'
 """
 
 from leetcode.lessons.binary_tree import TreeNode
+from leetcode.utils import timeutils
 
 
 class Solution(object):
+    @timeutils.time_interval
     def preorderTraversal(self, root):
         """
         :type root: TreeNode
