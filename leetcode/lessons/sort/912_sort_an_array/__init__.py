@@ -33,7 +33,7 @@ __time__    =  '2020/2/21 01:34'
 """
 难度：中等
 
-给定一个整数数组 nums，将该数组升序排列。
+给定一个整数数组nums，将该数组升序排列。
 
 示例 1：
 输入：[5,2,3,1]
@@ -55,7 +55,6 @@ class Solution(object):
         :type nums: List[int]
         :rtype: List[int]
         """
-        enumerate
         return sorted(nums)
 
     def quick_sort(self, nums, l, r):
