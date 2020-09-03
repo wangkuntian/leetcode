@@ -115,7 +115,7 @@ class Solution(object):
         if not node:
             return
 
-        cloned_start = Node(node.val)
+        cloned_start = Node(node.val, neighbors=[])
         to_clone = [node]
         node_mapping = {node: cloned_start}
 
@@ -124,7 +124,7 @@ class Solution(object):
             clone_node = node_mapping[node]
             for neighbor in node.neighbors:
                 if neighbor not in node_mapping:
-                    clone_neighbor = Node(neighbor.val)
+                    clone_neighbor = Node(neighbor.val, neighbors=[])
                     node_mapping[neighbor] = clone_neighbor
                     to_clone.append(neighbor)
 
@@ -132,4 +132,3 @@ class Solution(object):
                     clone_neighbor = node_mapping[neighbor]
                 clone_node.neighbors.append(clone_neighbor)
         return cloned_start
-

@@ -32,7 +32,7 @@ __time__    =  '2020/2/22 20:37'
 
 
 def neighbors(cur):
-    pass
+    return []
 
 
 def DFS(root, target):
@@ -48,3 +48,6 @@ def DFS(root, target):
                 stack.append(node)
                 visited.add(node)
     return False
+
+
+
