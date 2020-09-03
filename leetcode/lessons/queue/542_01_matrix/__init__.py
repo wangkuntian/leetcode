@@ -65,6 +65,7 @@ __time__    =  '2020/3/2 15:51'
 给定矩阵中至少有一个元素是 0。
 矩阵中的元素只在四个方向上相邻: 上、下、左、右。
 """
+import collections
 
 
 class Solution(object):
@@ -73,32 +74,68 @@ class Solution(object):
         :type matrix: List[List[int]]
         :rtype: List[List[int]]
         """
-        row = len(matrix)
-        col = len(matrix[0])
+        rows = len(matrix)
+        cols = len(matrix[0])
+        deltas = [
+            (1, 0), (-1, 0),
+            (0, 1), (0, -1)
+        ]
+        queue = collections.deque()
+        max_dist = rows + cols - 1
 
-        def bfs(r, c):
-            if matrix[r][c] == 0:
-                return 1
-            if r + 1 < row:
-                dps(r + 1, c)
-            if c + 1 < col:
-                dps(r, c + 1)
-            if r >= 1:
-                dps(r - 1, c)
-            if c >= 1:
-                dps(r, c - 1)
+        for r in range(rows):
+            for c in range(cols):
+                if matrix[r][c] == 1:
+                    matrix[r][c] = max_dist
+                else:
+                    queue.append((r, c))
+        print(matrix)
+        while queue:
+            print('before', queue)
+            r, c = queue.popleft()
+            for dr, dc in deltas:
+                if 0 <= r + dr < rows and 0 <= c + dc < cols and matrix[r][c] + 1 < matrix[r + dr][c + dc]:
+                    matrix[r + dr][c + dc] = matrix[r][c] + 1
+                    queue.append((r + dr, c + dc))
+            print('after', queue)
+        return matrix
 
-        for r in range(row):
-            for c in range(col):
-                if matrix[r][c] != 0:
-                    dps(r, c)
-
+    def updateMatrix2(self, matrix):
+        rows = len(matrix)
+        cols = len(matrix[0])
+        deltas = [
+            (1, 0), (-1, 0),
+            (0, 1), (0, -1)
+        ]
+        unknown = set()
+        for r in range(rows):
+            for c in range(cols):
+                if matrix[r][c] == 1:
+                    unknown.add((r, c))
+        while unknown:
+            new_unknown = set()
+            for r, c in unknown:
+                for dr, dc in deltas:
+                    if 0 <= r + dr < rows and 0 <= c + dc < cols and (r + dr, c + dc) not in unknown:
+                        matrix[r][c] = matrix[r + dr][c + dc] + 1
+                        break
+                else:
+                    new_unknown.add((r, c))
+            unknown = new_unknown
         return matrix
 
 
-marix = [
-    [1, 1, 1],
-    [1, 1, 0],
-    [1, 0, 1]
+matrix = [
+    [1, 1, 1, 1],
+    [1, 1, 1, 1],
+    [1, 1, 1, 1],
+    [1, 1, 1, 0]
 ]
-print(Solution().updateMatrix())
+print(Solution().updateMatrix(matrix))
+matrix = [
+    [1, 1, 1, 1],
+    [1, 1, 1, 1],
+    [1, 1, 1, 1],
+    [1, 1, 1, 0]
+]
+print(Solution().updateMatrix2(matrix))

@@ -90,12 +90,11 @@ class Solution(object):
         while a ** 2 <= n:
             b = int((n - a ** 2) ** 0.5)
             if a ** 2 + b ** 2 == n:
-                print(a, b)
                 return (not not a) + (not not b)
             a += 1
         return 3
 
 
-print(Solution().numSquares(13))
-print(Solution().numSquares_2(13))
+# print(Solution().numSquares(13))
+# print(Solution().numSquares_2(13))
 print(Solution().numSquares_3(16))
