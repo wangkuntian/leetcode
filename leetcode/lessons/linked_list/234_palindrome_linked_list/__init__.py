@@ -40,11 +40,11 @@ from leetcode.utils.timeutils import time_interval
 示例 1:
     输入: 1->2
     输出: false
-    
+
 示例 2:
     输入: 1->2->2->1
     输出: true
-    
+
 进阶：
     你能否用 O(n) 时间复杂度和 O(1) 空间复杂度解决此题？
 '''
@@ -57,6 +57,8 @@ class Solution(object):
         :type head: ListNode
         :rtype: bool
         """
+        if not head or not head.next:
+            return True
         fast = slow = head
         x = None
         while fast and fast.next:
@@ -89,8 +91,8 @@ class Solution(object):
         return x == x[::-1]
 
 
-l1 = ListNode.generate([1, 2, 2, 1])
+l1 = ListNode.generate([1, 2, 1, 2, 1])
 print(Solution().isPalindrome(l1))
 
-l2 = ListNode.generate([1, 2, 2, 1])
-print(Solution().isPalindrome2(l2))
+# l2 = ListNode.generate([1, 2, 2, 1])
+# print(Solution().isPalindrome2(l2))
