@@ -82,6 +82,17 @@ class Solution(object):
             level = next_level
         return root
 
+    def connect2(self, root):
+        if not root:
+            return
+        if root.left:
+            root.left.next = root.right
+            if root.next:
+                root.right.next = root.next.left
+        self.connect2(root.left)
+        self.connect2(root.right)
+        return root
+
 
 root = Node(1)
 left = Node(val=2, left=Node(4), right=Node(5))
@@ -90,4 +101,3 @@ root.left = left
 root.right = right
 
 print(Solution().connect(root))
-
