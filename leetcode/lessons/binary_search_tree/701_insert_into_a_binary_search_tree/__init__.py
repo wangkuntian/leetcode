@@ -97,6 +97,20 @@ class Solution(object):
                     return root
                 node = node.right
 
+    def insertIntoBST2(self, root, val):
+        """
+        :type root: TreeNode
+        :type val: int
+        :rtype: TreeNode
+        """
+        if not root:
+            return TreeNode(val)
+        if val < root.val:
+            root.left = self.insertIntoBST(root.left, val)
+        else:
+            root.right = self.insertIntoBST(root.right, val)
+        return root
+
 
 root = TreeNode.generate([4, 2, 1, None, None, 3, None, None, 7])
 print(Solution().insertIntoBST(root, 5))
