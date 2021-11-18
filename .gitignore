@@ -27,10 +27,6 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
-<<<<<<< HEAD
-=======
-MANIFEST
->>>>>>> faecb887ea198549ceb0fbbb450fa938cafe4751
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
@@ -107,3 +103,4 @@ ENV/
 
 # mypy
 .mypy_cache/
+.idea/
