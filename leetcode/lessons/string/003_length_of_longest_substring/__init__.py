@@ -3,7 +3,7 @@
 
 """
 __project__ =  'leetcode'
-__file__    =  '__init__.py.py'
+__file__    =  '__init__.py'
 __author__  =  'king'
 __time__    =  '2019/11/14 15:10'
 
@@ -50,7 +50,7 @@ from leetcode.utils.timeutils import time_interval
     输入: "pwwkew"
     输出: 3
     解释: 因为无重复字符的最长子串是"wke"，所以其长度为 3。
-    请注意，答案必须是子串的长度，"pwke"是一个子序列，不是子串。
+    请注意，答案必须是子串的长度，"wke"是一个子序列，不是子串。
 '''
 
 

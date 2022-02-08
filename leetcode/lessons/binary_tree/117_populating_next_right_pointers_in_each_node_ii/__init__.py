@@ -40,7 +40,7 @@ __time__    =  '2020/2/13 20:10'
 解释：给定二叉树如图 A 所示，你的函数应该填充它的每个 next 指针，以指向其下一个右侧节点，如图 B 所示。
 提示：
 树中的节点数小于 6000
--100 <= node.val <= 100
+-100<= node.val <= 100
 """
 
 from leetcode.lessons.binary_tree import Node
