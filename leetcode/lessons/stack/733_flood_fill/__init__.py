@@ -3,7 +3,7 @@
 
 """
 __project__ =  'leetcode'
-__file__    =  '__init__.py.py'
+__file__    =  '__init__.py'
 __author__  =  'king'
 __time__    =  '2020/3/2 15:05'
 
