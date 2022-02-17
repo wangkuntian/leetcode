@@ -52,6 +52,7 @@ from leetcode.utils.timeutils import time_interval
     解释: 因为无重复字符的最长子串是"wke"，所以其长度为 3。
     请注意，答案必须是子串的长度，"wke"是一个子序列，不是子串。
 '''
+import collections
 
 
 class Solution(object):
@@ -73,5 +74,26 @@ class Solution(object):
             last_seen[c] = index
         return longest
 
+    @time_interval
+    def lengthOfLongestSubstring2(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        window = collections.defaultdict(int)
+        result = 0
+        left = right = 0
+        while right < len(s):
+            c = s[right]
+            right += 1
+            window[c] += 1
+            while window[c] > 1:
+                d = s[left]
+                left += 1
+                window[d] -= 1
+            result = max(result, right - left)
+        return result
+
 
 print(Solution().lengthOfLongestSubstring('aa'))
+print(Solution().lengthOfLongestSubstring2('aa'))

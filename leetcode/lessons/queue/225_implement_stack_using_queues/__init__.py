@@ -58,6 +58,7 @@ class MyStack(object):
         Initialize your data structure here.
         """
         self.queue = collections.deque()
+        self.top_item = None
 
     def push(self, x):
         """
@@ -66,6 +67,7 @@ class MyStack(object):
         :rtype: None
         """
         self.queue.appendleft(x)
+        self.top_item = x
 
     def pop(self):
         """
@@ -85,12 +87,7 @@ class MyStack(object):
         Get the top element.
         :rtype: int
         """
-        new_queue = collections.deque()
-        while self.queue:
-            x = self.queue.pop()
-            new_queue.appendleft(x)
-        self.queue = new_queue
-        return x
+        return self.top_item
 
     def empty(self):
         """

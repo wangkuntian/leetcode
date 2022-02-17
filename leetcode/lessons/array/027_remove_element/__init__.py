@@ -29,6 +29,7 @@ __time__    =  '2020/1/7 10:37'
           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
                        佛祖保佑        永无BUG
 """
+from leetcode.utils.timeutils import time_interval
 
 """
 难度：简单
@@ -52,6 +53,7 @@ __time__    =  '2020/1/7 10:37'
 
 
 class Solution(object):
+    @time_interval
     def removeElement(self, nums, val):
         """
         :type nums: List[int]
@@ -67,3 +69,4 @@ class Solution(object):
 
 
 print(Solution().removeElement([3, 2, 2, 3], 3))
+print(Solution().removeElement2([3, 2, 2, 3], 3))

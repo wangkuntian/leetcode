@@ -73,9 +73,24 @@ class Solution(object):
         head.next = None
         return result
 
+    temp = ListNode(None)
+
+    def reverse_list_n(self, head, n):
+
+        if n == 1:
+            self.temp = head.next
+            return head
+        last = self.reverse_list_n(head.next, n - 1)
+        head.next.next = head
+        head.next = self.temp
+        return last
+
 
 l1 = ListNode.generate([1, 2, 3, 4, 5])
 print(Solution().reverseList(l1))
 
 l2 = ListNode.generate([1, 2, 3, 4, 5])
 print(Solution().reverseList_2(l2))
+
+l2 = ListNode.generate([1, 2, 3, 4, 5])
+print(Solution().reverse_list_n(l2, 2))

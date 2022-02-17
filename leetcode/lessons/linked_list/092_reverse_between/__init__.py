@@ -109,9 +109,36 @@ class Solution(object):
         tail.next = cur
         return head
 
+    temp = ListNode(None)
+
+    def reverse_n(self, head, n):
+        if n == 1:
+            self.temp = head.next
+            return head
+        last = self.reverse_n(head.next, n - 1)
+        head.next.next = head
+        head.next = self.temp
+        return last
+
+    @time_interval
+    def reverseBetween3(self, head, m, n):
+        """
+        :type head: ListNode
+        :type m: int
+        :type n: int
+        :rtype: ListNode
+        """
+        if m == 1:
+            return self.reverse_n(head, n)
+        head.next = self.reverseBetween3(head.next, m - 1, n - 1)
+        return head
+
 
 l1 = ListNode.generate([1, 2, 3, 4, 5])
 print(Solution().reverseBetween(l1, 2, 4))
 
 l2 = ListNode.generate([1, 2, 3, 4, 5])
 print(Solution().reverseBetween2(l2, 2, 4))
+
+l2 = ListNode.generate([1, 2, 3, 4, 5])
+print(Solution().reverseBetween3(l2, 2, 4))

@@ -52,7 +52,7 @@ __time__    =  '2020/2/11 11:49'
 说明:
 如果你可以运用递归和迭代两种方法解决这个问题，会很加分。
 """
-
+import collections
 from leetcode.lessons.binary_tree import TreeNode
 
 
@@ -76,6 +76,26 @@ class Solution(object):
         return self.is_mirror(right_node.right, left_node.left) and \
                self.is_mirror(left_node.right, right_node.left)
 
+    def isSymmetric2(self, root):
+        """
+        :type root: TreeNode
+        :rtype: bool
+        """
+        if not root or not (root.left or root.right):
+            return True
+        queue = collections.deque([(root.left, root.right)])
+        while queue:
+            left, right = queue.popleft()
+            if not left and not right:
+                continue
+            if not left or not right:
+                return False
+            if left.val != right.val:
+                return False
+            queue.append((left.left, right.right))
+            queue.append((left.right, right.left))
+        return True
+
 
 root = TreeNode(1)
 
@@ -92,3 +112,4 @@ root.left = left
 root.right = right
 
 print(Solution().isSymmetric(root))
+print(Solution().isSymmetric2(root))

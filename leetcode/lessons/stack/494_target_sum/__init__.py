@@ -69,10 +69,8 @@ class Solution(object):
 
         def dfs(cur, i, d):
             if i < len(nums) and (cur, i) not in d:
-                d[(cur, i)] = dfs(cur + nums[i], i + 1, d) + dfs(cur - nums[i], i + 1, d)
-            print('**** %s' % d)
-            print(cur, i)
-            print('****## %s' % d.get((cur, i), int(cur == S)))
+                d[(cur, i)] = dfs(cur + nums[i], i + 1, d) + \
+                              dfs(cur - nums[i], i + 1, d)
             return d.get((cur, i), int(cur == S))
 
         return dfs(0, 0, d)
@@ -85,14 +83,13 @@ class Solution(object):
         """
         if sum(nums) < S or (sum(nums) + S) % 2 == 1:
             return 0
-        P = (sum(nums) + S) // 2
-        print(P)
-        dp = [1] + [0 for _ in range(P)]
+        p = (sum(nums) + S) // 2
+        dp = [1] + [0 for _ in range(p)]
         for num in nums:
-            for j in range(P, num - 1, -1):
+            for j in range(p, num - 1, -1):
                 dp[j] += dp[j - num]
-        return dp[P]
+        return dp[p]
 
 
 print(Solution().findTargetSumWays(nums=[1, 1, 1, 1, 1], S=3))
-# print(Solution().findTargetSumWays_2(nums=[1, 1, 1, 1, 1], S=3))
+print(Solution().findTargetSumWays_2(nums=[1, 1, 1, 1, 1], S=3))

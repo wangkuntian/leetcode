@@ -79,5 +79,7 @@ class Solution(object):
         return self.valid(node.left, lower, node.val) and \
                self.valid(node.right, node.val, upper)
 
+
 print(Solution().isValidBST(TreeNode.generate([2, 1, None, None, 3])))
-print(Solution().isValidBST(TreeNode.generate([5, 1, None, None, 4, 3, None, None, 6])))
+print(Solution().isValidBST(
+    TreeNode.generate([5, 1, None, None, 4, 3, None, None, 6])))

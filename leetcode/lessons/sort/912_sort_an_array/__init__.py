@@ -81,9 +81,8 @@ class Solution(object):
         :type nums: List[int]
         :rtype: List[int]
         """
-        for i in range(0, len(nums) - 1):
-            for j in range(0, len(nums) - 1 - i):
-                # print(i)
+        for i in range(len(nums)):
+            for j in range(len(nums) - 1 - i):
                 if nums[j] > nums[j + 1]:
                     nums[j], nums[j + 1] = nums[j + 1], nums[j]
         return nums
@@ -95,7 +94,7 @@ class Solution(object):
         """
         length = len(nums)
         for i in range(length):
-            for j in range(i, length):
+            for j in range(i + 1, length):
                 if nums[i] > nums[j]:
                     nums[i], nums[j] = nums[j], nums[i]
         return nums
@@ -117,13 +116,13 @@ class Solution(object):
         :rtype: List[int]
         """
         length = len(nums)
-        gap = length // 2
-        while gap:
-            for i in range(gap, length):
-                while i - gap >= 0 and nums[i - gap] > nums[i]:
-                    nums[i - gap], nums[i] = nums[i], nums[i - gap]
-                    i -= gap
-            gap //= 2
+        mid = length // 2
+        while mid:
+            for i in range(mid, length):
+                while i - mid >= 0 and nums[i - mid] > nums[i]:
+                    nums[i - mid], nums[i] = nums[i], nums[i - mid]
+                    i -= mid
+            mid //= 2
         return nums
 
     def merge_sort(self, nums):
@@ -167,7 +166,7 @@ class Solution(object):
         i = l
         j = mid + 1
         while i <= mid or j <= r:
-            if i > mid or (j <= r and nums[j] < nums[i]):
+            if (j <= r and i > mid) or (j <= r and nums[j] < nums[i]):
                 temp.append(nums[j])
                 j += 1
             else:
@@ -191,6 +190,9 @@ class Solution(object):
         :type nums: List[int]
         :rtype: List[int]
         """
+        import heapq
+        heapq.heapify(nums)
+        return nums
 
 
 nums = [5, 4, 3, 2, 1]

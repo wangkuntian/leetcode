@@ -59,7 +59,5 @@ class Solution(object):
                 i += 1
         nums[i:] = [0] * (len(nums) - i)
 
-        print(nums)
-
 
 Solution().moveZeroes([0, 1, 0, 3, 12])

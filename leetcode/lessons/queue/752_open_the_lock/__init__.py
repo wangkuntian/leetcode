@@ -148,6 +148,7 @@ class Solution(object):
 deadends = ["0201", "0101", "0102", "1212", "2002"]
 target = "0202"
 print(Solution().openLock(deadends, target))
+print(Solution().openLock_2(deadends, target))
 deadends = ["8887", "8889", "8878", "8898", "8788", "8988", "7888", "9888"]
 target = "8888"
 print(Solution().openLock_2(deadends, target))

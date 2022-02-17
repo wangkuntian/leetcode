@@ -62,6 +62,24 @@ class Solution(object):
                 node = node.next
         return head
 
+    @time_interval
+    def deleteDuplicates2(self, head):
+        """
+        :type head: ListNode
+        :rtype: ListNode
+        """
+        if not head:
+            return None
+        slow = fast = head
+        while fast:
+            if fast.val != slow.val:
+                slow.next = fast
+                slow = slow.next
+            fast = fast.next
+        slow.next = None
+        return head
+
 
 l1 = ListNode.generate([1, 1])
 print(Solution().deleteDuplicates(l1))
+print(Solution().deleteDuplicates2(l1))
